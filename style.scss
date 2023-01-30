@@ -1,0 +1,1978 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Noto+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap");
+
+/*Обнуление*/
+* {
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+*,
+*:before,
+*:after {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+:focus,
+:active {
+    outline: none;
+}
+a:focus,
+a:active {
+    outline: none;
+}
+nav,
+footer,
+header,
+aside {
+    display: block;
+}
+html,
+body {
+    height: 100%;
+    width: 100%;
+    font-size: 100%;
+    line-height: 1;
+    font-size: 14px;
+    -ms-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+}
+input,
+button,
+textarea {
+    font-family: inherit;
+}
+input::-ms-clear {
+    display: none;
+}
+button {
+    cursor: pointer;
+}
+button::-moz-focus-inner {
+    padding: 0;
+    border: 0;
+}
+a,
+a:visited {
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: none;
+}
+ul li {
+    list-style: none;
+}
+img {
+    vertical-align: top;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-size: inherit;
+    font-weight: inherit;
+}
+head,
+body {
+    overflow-x: hidden;
+}
+
+// color //
+$color-black: #222;
+$color-white: #fff;
+$color-green: #319f01;
+
+// fonts //
+$main-font: "Open Sans", sans-serif;
+$Montserrat-font: "Montserrat", sans-serif;
+$NotoSans-font: "Noto Sans", sans-serif;
+#modal {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px gray;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 2001;
+}
+
+#choices {
+    margin-bottom: 20px;
+    padding: 10px;
+    width: 100%;
+    font-size: 16px;
+}
+
+#show-modal-btn {
+    cursor: pointer;
+}
+
+#close-modal-btn {
+    background-color: rgb(36, 35, 35);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-top: 0 auto;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: $main-font;
+    font-weight: normal;
+    font-size: 16px;
+    color: $color-black;
+    position: relative;
+    margin-top: 70px;
+}
+.checkbox {
+    margin-top: 20px;
+}
+
+.custom-checkbox {
+    margin-top: 20px;
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* для элемента label, связанного с .custom-checkbox */
+.custom-checkbox + label {
+    display: inline-flex;
+    align-items: center;
+    user-select: none;
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 130%;
+    /* identical to box height, or 14px */
+
+    color: #7e868e;
+}
+
+/* создание в label псевдоэлемента before со следующими стилями */
+.custom-checkbox + label::before {
+    content: "";
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    flex-shrink: 0;
+    flex-grow: 0;
+    border: 1px solid #adb5bd;
+    border-radius: 0.25em;
+    margin-right: 0.5em;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 50% 50%;
+    cursor: pointer;
+}
+
+/* стили при наведении курсора на checkbox */
+.custom-checkbox:not(:disabled):not(:checked) + label:hover::before {
+    border-color: #b3d7ff;
+}
+
+/* стили для активного чекбокса (при нажатии на него) */
+.custom-checkbox:not(:disabled):active + label::before {
+    background-color: #b3d7ff;
+    border-color: #b3d7ff;
+}
+
+/* стили для чекбокса, находящегося в фокусе */
+.custom-checkbox:focus + label::before {
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* стили для чекбокса, находящегося в фокусе и не находящегося в состоянии checked */
+.custom-checkbox:focus:not(:checked) + label::before {
+    border-color: #5ea440;
+}
+
+/* стили для чекбокса, находящегося в состоянии checked */
+.custom-checkbox:checked + label::before {
+    border-color: #319f01;
+    background-color: #319f01;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e");
+}
+
+.header {
+    width: 100vw;
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    position: fixed;
+    margin-top: -70px;
+    background-color: #ffffff;
+
+    &__container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__logo {
+        width: 220px;
+        height: 55px;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    &-navbar {
+        display: flex;
+        align-items: center;
+        margin-left: 49px;
+
+        &__link {
+            font-family: $Montserrat-font;
+            font-weight: 400;
+            font-size: 20px;
+            line-height: 24px;
+            position: relative;
+            color: inherit;
+            transition: ease-in 0.3s;
+
+            &:not(:first-child) {
+                margin-left: 44px;
+            }
+
+            &::before {
+                content: "";
+                width: 0;
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                height: 1px;
+                background: $color-black;
+                transition: ease-in 0.3s;
+            }
+
+            &:hover {
+                &::before {
+                    width: 100%;
+                }
+            }
+
+            &:active {
+                color: #6c6c6c;
+            }
+        }
+    }
+
+    &-media {
+        display: flex;
+        flex-direction: column;
+        align-items: end;
+
+        &:not(:first-child) {
+            margin-left: 40px;
+        }
+
+        &__title {
+            display: flex;
+            align-items: center;
+
+            span,
+            a {
+                font-weight: 600;
+                font-size: 20px;
+                line-height: 24px;
+                font-family: $Montserrat-font;
+                color: inherit;
+                margin-left: 8px;
+            }
+
+            a {
+                cursor: pointer;
+            }
+        }
+
+        &__link {
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 17px;
+            color: $color-green;
+            position: relative;
+            display: inline-block;
+
+            &::before {
+                content: "";
+                width: 0;
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                height: 1px;
+                background: $color-green;
+                transition: ease-in 0.3s;
+            }
+
+            &:active {
+                color: #298601;
+            }
+
+            &--nostroce {
+                &:hover {
+                    &::before {
+                        width: 100%;
+                    }
+                }
+            }
+
+            &--stroce {
+                &::before {
+                    width: 100%;
+                }
+
+                &:hover {
+                    &::before {
+                        width: 0;
+                    }
+                }
+            }
+        }
+    }
+}
+.h_down {
+    padding: 100px;
+    max-width: 100%;
+    background-image: url(../img/media/banner.png);
+    background-repeat: no-repeat;
+    display: flex;
+    height: auto;
+    align-items: center;
+    justify-content: center;
+    &_main {
+        margin-left: 60px;
+        &_title {
+            font-family: "Open Sans";
+            font-style: normal;
+            font-weight: 700;
+            font-size: 72px;
+            line-height: 98px;
+
+            letter-spacing: -0.02em;
+            text-transform: uppercase;
+
+            color: #000000;
+        }
+        &_text {
+            width: 400px;
+            font-family: "Open Sans";
+            font-style: normal;
+            font-weight: 400;
+            font-size: 32px;
+            line-height: 40px;
+            /* or 125% */
+
+            letter-spacing: 0.02em;
+
+            /* black as my soul */
+
+            color: #000000;
+        }
+        &_btn {
+            margin-top: 55px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            padding: 18px 32px;
+            gap: 10px;
+            cursor: pointer;
+            transition: background-color 1s;
+
+            width: 326px;
+            height: 63px;
+
+            /* Herbal Green */
+
+            background: #319f01;
+            border-radius: 3px;
+            font-family: "Open Sans";
+            font-style: normal;
+            font-weight: 700;
+            font-size: 20px;
+            line-height: 27px;
+
+            /* white marshmallow */
+
+            color: #ffffff;
+        }
+        &_btn:hover {
+            background: #3bbb03;
+        }
+        &_btn:active {
+            background: #298601;
+        }
+    }
+}
+
+.double:nth-child(2) {
+    margin-left: 90px;
+}
+
+.plus {
+    padding: 130px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    &_main {
+        &_title {
+            text-align: center;
+            letter-spacing: -0.02em;
+            text-transform: uppercase;
+
+            /* black as my soul */
+
+            color: #000000;
+            font-family: "Open Sans";
+            font-style: normal;
+            font-weight: 700;
+            font-size: 40px;
+            line-height: 54px;
+        }
+        &_items {
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            &_item {
+                margin-top: 90px;
+                display: flex;
+                &_img {
+                    width: 98px;
+                    height: 98px;
+                }
+                &_text {
+                    margin-left: 25px;
+                    &_title {
+                        font-family: "Open Sans";
+                        font-style: normal;
+                        font-weight: 700;
+                        font-size: 24px;
+                        line-height: 33px;
+                        letter-spacing: 0.02em;
+
+                        /* black as my soul */
+
+                        color: #000000;
+                    }
+                    &_descr {
+                        font-family: "Noto Sans";
+                        font-style: normal;
+                        font-weight: 400;
+                        font-size: 18px;
+                        line-height: 25px;
+                        letter-spacing: 0.02em;
+
+                        /* black as my soul */
+
+                        color: #000000;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.goods {
+    background-color: #f2efed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 60px;
+    &_main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        &_items {
+            margin-top: 75px;
+            display: flex;
+
+            &_item {
+                width: 300px;
+                height: 375px;
+                margin-left: 12px;
+                &_img {
+                    height: 195px;
+                    width: 100%;
+                }
+                &_title {
+                    margin-top: 15px;
+                    font-family: "Noto Sans", sans-serif;
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 18px;
+                    line-height: 25px;
+                    letter-spacing: 0.02em;
+                    color: #000000;
+                    width: 285px;
+                }
+                &_row {
+                    display: flex;
+                    margin-top: 16px;
+                    justify-content: space-between;
+                    &_rub {
+                        font-family: "Montserrat";
+                        font-style: normal;
+                        font-weight: 700;
+                        font-size: 18px;
+                        line-height: 22px;
+                        /* identical to box height */
+
+                        text-align: center;
+
+                        /* black as my soul */
+
+                        color: #000000;
+                    }
+                    &_count {
+                        display: flex;
+                        &_num {
+                            width: 40px;
+                            height: 20px;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            border: 0.5px solid #c9c9c9;
+                            border-radius: 3px;
+                        }
+                    }
+                }
+                &_btn {
+                    display: flex;
+                    margin-top: 20px;
+                    justify-content: end;
+                    cursor: pointer;
+                    transition: background-color 1s;
+
+                    &_b {
+                        border: 1px solid #000000;
+                        border-radius: 3px;
+                        padding: 8px 24px;
+                        user-select: none;
+                    }
+                    &_b:hover {
+                        background: #f0f0f0;
+                        transition: background-color 1s;
+                    }
+                    &_b:active {
+                        background: #ffffff;
+                        transition: background-color 1s;
+                    }
+                }
+            }
+        }
+    }
+}
+.double2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.reasons {
+    padding: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    &_main {
+        &_title {
+            text-align: center;
+            letter-spacing: -0.02em;
+            text-transform: uppercase;
+
+            /* black as my soul */
+
+            color: #000000;
+            font-family: "Open Sans";
+            font-style: normal;
+            font-weight: 700;
+            font-size: 40px;
+            line-height: 54px;
+        }
+        &_items {
+            margin-top: 75px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            &_item {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                &_img {
+                    width: 120px;
+                    height: 120px;
+                }
+                &_title {
+                    margin-top: 25px;
+                    width: 184px;
+                    font-family: "Open Sans";
+                    font-style: normal;
+                    font-weight: 700;
+                    font-size: 24px;
+                    line-height: 33px;
+                    text-align: center;
+                    letter-spacing: 0.02em;
+
+                    /* black as my soul */
+
+                    color: #000000;
+                }
+                &_text {
+                    margin-top: 8px;
+                    font-family: "Noto Sans";
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 18px;
+                    line-height: 25px;
+                    text-align: center;
+                    letter-spacing: 0.02em;
+
+                    /* black as my soul */
+
+                    color: #000000;
+                }
+            }
+        }
+    }
+}
+
+.video {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 80px;
+    background-image: url(../img/media/background_crab.png);
+    &_main {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        &_v {
+            margin-top: 70px;
+            width: 1280px;
+            height: 720px;
+            // background-image: url(../media/video.png);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            &_pcircl {
+                height: 141px;
+                width: 141px;
+                // background-image: url(../media/play-circle.png);
+            }
+        }
+    }
+}
+
+.form {
+    padding: 100px;
+    width: 100%;
+    background-image: url(../img/media/background_form.png);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    &_container {
+        width: 80%;
+        display: flex;
+        justify-content: end;
+    }
+    &_main {
+        background-color: #ffffff;
+        padding: 40px;
+        border-radius: 3px;
+        &_title {
+            font-family: "Open Sans", sans-serif;
+            font-style: normal;
+            font-weight: 700;
+            font-size: 40px;
+            line-height: 54px;
+            /* identical to box height */
+
+            text-align: center;
+            letter-spacing: -0.02em;
+            text-transform: uppercase;
+
+            color: #2e363e;
+        }
+        &_des {
+            margin-top: 20px;
+            font-family: "Noto Sans", sans-serif;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 25px;
+            /* identical to box height */
+
+            text-align: center;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+
+            color: #2e363e;
+        }
+        &_form {
+            margin-top: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            margin-left: 13%;
+
+            &_input {
+                margin-top: 20px;
+                border: 1px solid #7a7a7a;
+                border-radius: 5px;
+                width: 340px;
+                height: 85px;
+                color: #7a7a7a;
+                padding-left: 20px;
+            }
+
+            &_input::placeholder {
+                background-image: url(../media/phone_form.svg);
+                background-repeat: no-repeat;
+                background-position: left;
+                padding-left: 25px;
+            }
+            &_input:nth-child(2)::placeholder {
+                background-image: url(../media/mail_form.svg);
+                background-repeat: no-repeat;
+                background-position: left;
+                padding-left: 25px;
+            }
+            &_input:active::placeholder {
+                background-image: none;
+                color: #ffffff;
+            }
+            &_input:focus::placeholder {
+                background-image: none;
+                color: #ffffff;
+            }
+            &_btn {
+                margin-top: 20px;
+                width: 340px;
+                height: 63px;
+                color: #ffffff;
+                background: none;
+                cursor: pointer;
+                transition: background-color 1s;
+
+                /* Herbal Green */
+
+                background: #319f01;
+                border-radius: 5px;
+                font-family: "Open Sans";
+                font-style: normal;
+                font-weight: 700;
+                font-size: 20px;
+                line-height: 27px;
+                border-color: white;
+            }
+            &_btn:hover {
+                background: #3bbb03;
+            }
+            &_btn:active {
+                background: #298601;
+            }
+        }
+    }
+}
+
+.partners {
+    padding: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    &_main {
+        &_items {
+            margin-top: 90px;
+            display: flex;
+            &_item {
+                display: flex;
+                &_img {
+                    height: 126px;
+                }
+                &:not(:first-child) {
+                    margin-left: 44px;
+                }
+            }
+        }
+    }
+}
+
+.otz {
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: url(../media/background_crab_otz.png);
+    &_main {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        &_items {
+            margin-top: 75px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            &_item {
+                // display: flex;
+                // flex-direction: column;
+                // align-items: center;
+                // width: 410px;
+                // background: #ffffff;
+                // border: 1px solid #cecece;
+                // border-radius: 10px;
+                // margin-left: 24px;
+                padding: 20px;
+                text-align: center;
+                display: inline-block;
+                margin: 10px;
+                box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+                background-color: #fff;
+                &_img {
+                    margin-top: 25px;
+                    width: 120px;
+                    height: 120px;
+                    border-radius: 100px;
+                }
+                &_title {
+                    margin-top: 25px;
+                    font-family: "Open Sans", sans-serif;
+                    font-style: normal;
+                    font-weight: 700;
+                    font-size: 24px;
+                    line-height: 33px;
+                    text-align: center;
+                    letter-spacing: 0.02em;
+
+                    /* black as my soul */
+
+                    color: #000000;
+                }
+                &_text {
+                    margin-bottom: 50px;
+                    width: 350px;
+                    margin-top: 30px;
+                    font-family: "Noto Sans", sans-serif;
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 18px;
+                    line-height: 25px;
+                    letter-spacing: 0.02em;
+
+                    /* black as my soul */
+
+                    color: #000000;
+                }
+            }
+        }
+    }
+}
+
+.map {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    &_main {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    &_yan {
+        margin-top: 80px;
+        height: 580px;
+        width: 100%;
+        background-color: rgb(87, 87, 87);
+    }
+}
+
+.gap {
+    margin-top: 60px;
+}
+
+.product-card {
+    width: 300px;
+    padding: 20px;
+    text-align: center;
+    display: inline-block;
+    margin: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background-color: #fff;
+}
+
+.product-card img {
+    width: 100%;
+    cursor: pointer;
+}
+
+#preview-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+}
+
+.footer {
+    width: 100vw;
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+
+    &__container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__logo {
+        width: 220px;
+        height: 55px;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    &-media {
+        display: flex;
+        flex-direction: column;
+        align-items: end;
+
+        &:not(:first-child) {
+            margin-left: 40px;
+            line-height: 209px;
+            margin-left: 80px;
+            font-weight: 900;
+            font-style: bold;
+        }
+
+        &__title {
+            display: flex;
+            align-items: center;
+
+            span,
+            a {
+                font-style: normal;
+                font-weight: 400;
+                font-size: 24px;
+                line-height: 29px;
+
+                font-family: $Montserrat-font;
+                color: inherit;
+                margin-left: 8px;
+            }
+
+            a {
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+.burger-menu {
+    display: none;
+    cursor: pointer;
+}
+
+.line {
+    width: 25px;
+    height: 3px;
+    margin: 5px;
+    background-color: #fff;
+}
+
+.navigation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background-color: #333;
+    color: #fff;
+    list-style: none;
+    padding: 0;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    transform: translateY(-100%);
+    transition: all 0.3s ease-in-out;
+}
+
+.burger-menu-btn {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 40px;
+    width: 40px;
+    padding: 10px;
+    position: absolute;
+    top: -10px;
+    right: 10px;
+    z-index: 10;
+    background: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.burger-menu-btn__line {
+    height: 2px;
+    width: 100%;
+    background-color: #000;
+}
+
+.burger-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    transform: translateX(-100%);
+    transition: transform 0.5s;
+    z-index: 9;
+}
+
+.burger-menu__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+}
+
+.burger-menu__item {
+    margin-top: 50px;
+}
+
+.burger-menu__link {
+    font-size: 20px;
+    text-decoration: none;
+    color: #000;
+}
+
+.show-burger-menu {
+    transform: translateX(0);
+}
+
+@media screen and (max-width: 720px) {
+    .burger-menu-btn {
+        display: flex;
+    }
+    .display {
+        display: flex;
+        flex-direction: column;
+        align-items: end;
+    }
+    .burger-menu {
+        display: block;
+    }
+
+    .navigation {
+        position: fixed;
+        top: 100%;
+        left: 0;
+        right: 0;
+    }
+    body,
+    html {
+        overflow-x: hidden;
+    }
+    .header {
+        width: 100vw;
+        padding: 0px;
+        display: flex;
+        align-items: center;
+        position: fixed;
+        margin-top: -65px;
+        background-color: #ffffff;
+
+        &__container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        &__content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        &__logo {
+            width: 105px;
+            height: 25px;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
+        }
+
+        &-navbar {
+            display: none;
+            align-items: center;
+            margin-left: 49px;
+
+            &__link {
+                font-family: $Montserrat-font;
+                font-weight: 400;
+                font-size: 20px;
+                line-height: 24px;
+                position: relative;
+                color: inherit;
+                transition: ease-in 0.3s;
+
+                &:not(:first-child) {
+                    margin-left: 44px;
+                }
+
+                &::before {
+                    content: "";
+                    width: 0;
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    height: 1px;
+                    background: $color-black;
+                    transition: ease-in 0.3s;
+                }
+
+                &:hover {
+                    &::before {
+                        width: 100%;
+                    }
+                }
+
+                &:active {
+                    color: #6c6c6c;
+                }
+            }
+        }
+
+        &-media {
+            display: none;
+            flex-direction: column;
+            align-items: end;
+
+            &:not(:first-child) {
+                margin-left: 10px;
+            }
+
+            &__title {
+                display: flex;
+                align-items: center;
+
+                span,
+                a {
+                    font-weight: 600;
+                    font-size: 10px;
+                    line-height: 14px;
+                    font-family: $Montserrat-font;
+                    color: inherit;
+                    margin-left: 8px;
+                }
+
+                a {
+                    cursor: pointer;
+                }
+            }
+
+            &__link {
+                font-weight: 400;
+                font-size: 8px;
+                line-height: 7px;
+                color: $color-green;
+                position: relative;
+                display: inline-block;
+
+                &::before {
+                    content: "";
+                    width: 0;
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    height: 1px;
+                    background: $color-green;
+                    transition: ease-in 0.3s;
+                }
+
+                &:active {
+                    color: #298601;
+                }
+
+                &--nostroce {
+                    &:hover {
+                        &::before {
+                            width: 100%;
+                        }
+                    }
+                }
+
+                &--stroce {
+                    &::before {
+                        width: 100%;
+                    }
+
+                    &:hover {
+                        &::before {
+                            width: 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .h_down {
+        padding: 10px;
+        max-width: 100%;
+        background-image: url(../img/media/banner.png);
+        display: flex;
+        height: auto;
+        align-items: center;
+        justify-content: center;
+        background-size: contain;
+        &_main {
+            margin-left: 10px;
+            &_title {
+                font-family: "Open Sans";
+                font-style: normal;
+                font-weight: 700;
+                font-size: 22px;
+                line-height: 28px;
+
+                letter-spacing: -0.02em;
+                text-transform: uppercase;
+
+                color: #000000;
+            }
+            &_text {
+                width: 400px;
+                font-family: "Open Sans";
+                font-style: normal;
+                font-weight: 400;
+                font-size: 12px;
+                line-height: 10px;
+                /* or 125% */
+
+                letter-spacing: 0.02em;
+
+                /* black as my soul */
+
+                color: #000000;
+            }
+            &_btn {
+                margin-top: 15px;
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                padding: 4px 8px;
+                gap: 10px;
+                cursor: pointer;
+                transition: background-color 1s;
+
+                width: 149px;
+                height: 28px;
+
+                /* Herbal Green */
+
+                background: #319f01;
+                border-radius: 3px;
+                font-family: "Open Sans";
+                font-style: normal;
+                font-weight: 700;
+                font-size: 10px;
+                line-height: 17px;
+
+                /* white marshmallow */
+
+                color: #ffffff;
+            }
+            &_btn:hover {
+                background: #3bbb03;
+            }
+            &_btn:active {
+                background: #298601;
+            }
+        }
+    }
+    .double:nth-child(2) {
+        margin-left: 0px;
+    }
+    .double {
+        display: flex;
+        flex-direction: column;
+    }
+    .plus {
+        padding: 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        &_main {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            &_title {
+                text-align: center;
+                letter-spacing: -0.02em;
+                text-transform: uppercase;
+
+                /* black as my soul */
+
+                color: #000000;
+                font-family: "Open Sans";
+                font-style: normal;
+                font-weight: 700;
+                font-size: 18px;
+                line-height: 25px;
+            }
+            &_items {
+                margin-top: 15px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                &_item {
+                    margin-top: 30px;
+                    display: flex;
+                    &_img {
+                        width: 50px;
+                        height: 50px;
+                    }
+                    &_text {
+                        margin-left: 25px;
+                        &_title {
+                            font-family: "Open Sans";
+                            font-style: normal;
+                            font-weight: 700;
+                            font-size: 12.3636px;
+                            line-height: 17px;
+                            letter-spacing: 0.02em;
+
+                            /* black as my soul */
+
+                            color: #000000;
+                        }
+                        &_descr {
+                            font-family: "Noto Sans";
+                            font-style: normal;
+                            font-weight: 400;
+                            font-size: 9.27273px;
+                            line-height: 13px;
+                            letter-spacing: 0.02em;
+
+                            /* black as my soul */
+
+                            color: #000000;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .goods {
+        background-color: #f2efed;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 60px;
+        &_main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            &_items {
+                margin-top: 75px;
+                display: flex;
+
+                &_item {
+                    width: 300px;
+                    height: 375px;
+                    margin-left: 12px;
+                    &_img {
+                        height: 195px;
+                        width: 100%;
+                    }
+                    &_title {
+                        margin-top: 15px;
+                        font-family: "Noto Sans", sans-serif;
+                        font-style: normal;
+                        font-weight: 400;
+                        font-size: 18px;
+                        line-height: 25px;
+                        letter-spacing: 0.02em;
+                        color: #000000;
+                        width: 285px;
+                    }
+                    &_row {
+                        display: flex;
+                        margin-top: 16px;
+                        justify-content: space-between;
+                        &_rub {
+                            font-family: "Montserrat";
+                            font-style: normal;
+                            font-weight: 700;
+                            font-size: 18px;
+                            line-height: 22px;
+                            /* identical to box height */
+
+                            text-align: center;
+
+                            /* black as my soul */
+
+                            color: #000000;
+                        }
+                        &_count {
+                            display: flex;
+                            &_num {
+                                width: 40px;
+                                height: 20px;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                border: 0.5px solid #c9c9c9;
+                                border-radius: 3px;
+                            }
+                        }
+                    }
+                    &_btn {
+                        display: flex;
+                        margin-top: 20px;
+                        justify-content: end;
+                        cursor: pointer;
+                        transition: background-color 1s;
+
+                        &_b {
+                            border: 1px solid #000000;
+                            border-radius: 3px;
+                            padding: 8px 24px;
+                            user-select: none;
+                        }
+                        &_b:hover {
+                            background: #f0f0f0;
+                            transition: background-color 1s;
+                        }
+                        &_b:active {
+                            background: #ffffff;
+                            transition: background-color 1s;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .double2 {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-left: 20px;
+    }
+    .margin {
+        margin-top: 30px;
+    }
+    .reasons {
+        margin-top: 0;
+        padding: 80px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        &_main {
+            &_title {
+                text-align: center;
+                letter-spacing: -0.02em;
+                text-transform: uppercase;
+
+                /* black as my soul */
+
+                color: #000000;
+                font-family: "Open Sans";
+                font-style: normal;
+                font-weight: 700;
+                font-size: 18px;
+                line-height: 25px;
+                margin-bottom: 10px;
+            }
+            &_items {
+                margin-top: 0px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                &_item {
+                    margin-top: 0px;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    &_img {
+                        width: 50px;
+                        height: 50px;
+                    }
+                    &_title {
+                        width: 184px;
+                        font-family: "Open Sans";
+                        font-style: normal;
+                        font-weight: 700;
+                        font-size: 13.36px;
+                        line-height: 18px;
+                        text-align: left;
+                        letter-spacing: 0.02em;
+
+                        /* black as my soul */
+
+                        color: #000000;
+                    }
+                    &_text {
+                        margin-top: 4px;
+                        font-family: "Noto Sans";
+                        font-style: normal;
+                        font-weight: 400;
+                        font-size: 9.27px;
+                        line-height: 13px;
+                        text-align: left;
+                        letter-spacing: 0.02em;
+
+                        /* black as my soul */
+
+                        color: #000000;
+                    }
+                }
+            }
+        }
+    }
+
+    .video {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding: 30px;
+        background-image: url(../img/media/background_crab.png);
+        background-size: contain;
+        &_main {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            &_v {
+                margin-top: 10px;
+                width: 100%;
+                height: auto;
+                // background-image: url(../media/video.png);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                &_pcircl {
+                    height: 141px;
+                    width: 141px;
+                    // background-image: url(../media/play-circle.png);
+                }
+            }
+        }
+    }
+
+    .form {
+        padding: 30px;
+        width: 100%;
+        background-image: url(../img/media/background_form.png);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-size: contain;
+        &_container {
+            width: 80%;
+            display: flex;
+            justify-content: end;
+        }
+        &_main {
+            padding: 10px;
+            background-color: #ffffff;
+            border-radius: 3px;
+            &_title {
+                font-family: "Open Sans", sans-serif;
+                font-style: normal;
+                font-weight: 700;
+                font-size: 21.4392px;
+                line-height: 29px;
+                /* identical to box height */
+
+                text-align: center;
+                letter-spacing: -0.02em;
+                text-transform: uppercase;
+
+                color: #2e363e;
+            }
+            &_des {
+                margin-top: 0px;
+                font-family: "Noto Sans", sans-serif;
+                font-style: normal;
+                font-weight: 400;
+                font-size: 9.64762px;
+                line-height: 13px;
+                /* identical to box height */
+
+                text-align: center;
+                letter-spacing: 0.02em;
+                text-transform: uppercase;
+
+                color: #2e363e;
+            }
+            &_form {
+                margin-top: 0px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: flex-start;
+                margin-left: 3%;
+
+                &_input {
+                    margin-top: 5px;
+                    border: 1px solid #7a7a7a;
+                    border-radius: 5px;
+                    width: 180px;
+                    height: 45px;
+                    color: #7a7a7a;
+                    padding-left: 0px;
+                }
+
+                &_input::placeholder {
+                    background-image: url(../media/phone_form.svg);
+                    background-repeat: no-repeat;
+                    background-position: left;
+                    padding-left: 25px;
+                }
+                &_input:nth-child(2)::placeholder {
+                    background-image: url(../media/mail_form.svg);
+                    background-repeat: no-repeat;
+                    background-position: left;
+                    padding-left: 25px;
+                }
+                &_input:active::placeholder {
+                    background-image: none;
+                    color: #ffffff;
+                }
+                &_input:focus::placeholder {
+                    background-image: none;
+                    color: #ffffff;
+                }
+                &_btn {
+                    margin-top: 20px;
+                    width: 180px;
+                    height: 35px;
+                    color: #ffffff;
+                    background: none;
+                    cursor: pointer;
+                    transition: background-color 1s;
+
+                    /* Herbal Green */
+
+                    background: #319f01;
+                    border-radius: 5px;
+                    font-family: "Open Sans";
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 6px;
+                    line-height: 130%;
+                    border-color: white;
+                }
+                &_btn:hover {
+                    background: #3bbb03;
+                }
+                &_btn:active {
+                    background: #298601;
+                }
+            }
+        }
+    }
+    .custom-checkbox + label {
+        display: inline-flex;
+        align-items: center;
+        user-select: none;
+        font-family: "Montserrat";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 130%;
+        color: #7e868e;
+    }
+
+    .partners {
+        padding: 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        &_main {
+            &_items {
+                margin-top: 20px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                padding: 10px;
+                &_item {
+                    margin-left: 0px;
+                    display: flex;
+                    margin-top: 10px;
+                    &_img {
+                        height: 70px;
+                    }
+                }
+                :not(:first-child) {
+                    margin-left: 0px;
+                }
+            }
+        }
+    }
+
+    .otz {
+        padding: 60px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-image: url(../media/background_crab_otz.png);
+        &_main {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            &_items {
+                margin-top: 75px;
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                &_item {
+                    // display: flex;
+                    // flex-direction: column;
+                    // align-items: center;
+                    // width: 410px;
+                    // background: #ffffff;
+                    // border: 1px solid #cecece;
+                    // border-radius: 10px;
+                    // margin-left: 24px;
+                    padding: 20px;
+                    text-align: center;
+                    display: inline-block;
+                    margin: 10px;
+                    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+                    background-color: #fff;
+                    &_img {
+                        margin-top: 25px;
+                        width: 120px;
+                        height: 120px;
+                        border-radius: 100px;
+                    }
+                    &_title {
+                        margin-top: 25px;
+                        font-family: "Open Sans", sans-serif;
+                        font-style: normal;
+                        font-weight: 700;
+                        font-size: 24px;
+                        line-height: 33px;
+                        text-align: center;
+                        letter-spacing: 0.02em;
+
+                        /* black as my soul */
+
+                        color: #000000;
+                    }
+                    &_text {
+                        margin-bottom: 50px;
+                        width: 350px;
+                        margin-top: 30px;
+                        font-family: "Noto Sans", sans-serif;
+                        font-style: normal;
+                        font-weight: 400;
+                        font-size: 18px;
+                        line-height: 25px;
+                        letter-spacing: 0.02em;
+                        padding: 0px 19px;
+
+                        /* black as my soul */
+
+                        color: #000000;
+                    }
+                }
+            }
+        }
+    }
+
+    .map {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: center;
+        &_main {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        &_yan {
+            margin-top: 80px;
+            height: 580px;
+            width: 100%;
+            background-color: rgb(87, 87, 87);
+        }
+    }
+
+    .gap {
+        margin-top: 60px;
+    }
+
+    .product-card {
+        width: 300px;
+        padding: 20px;
+        text-align: center;
+        display: inline-block;
+        margin: 10px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        background-color: #fff;
+    }
+
+    .product-card img {
+        width: 100%;
+        cursor: pointer;
+    }
+
+    #preview-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        display: flex;
+        align-items: center;
+    }
+
+    .footer {
+        width: 100vw;
+        padding: 30px;
+        display: flex;
+        align-items: center;
+        background-color: #ffffff;
+
+        &__container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        &__content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        &__logo {
+            width: 110px;
+            height: 26px;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+
+        &-media {
+            display: flex;
+            flex-direction: column;
+            align-items: end;
+
+            &:first-child {
+                display: none;
+            }
+            &:not(:first-child) {
+                margin-left: 10px;
+            }
+
+            &__title {
+                display: flex;
+                align-items: center;
+
+                span,
+                a {
+                    font-weight: 600;
+                    font-size: 10.7722px;
+                    line-height: 17px;
+                    font-family: $Montserrat-font;
+                    color: inherit;
+                    margin-left: 8px;
+                }
+
+                a {
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}
