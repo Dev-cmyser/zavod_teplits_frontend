@@ -90,8 +90,10 @@ $color-green: #319f01;
 $main-font: "Open Sans", sans-serif;
 $Montserrat-font: "Montserrat", sans-serif;
 $NotoSans-font: "Noto Sans", sans-serif;
+
 #modal {
-    background-color: white;
+    display: none;
+    background-color: rgb(255, 255, 255);
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px gray;
@@ -99,7 +101,6 @@ $NotoSans-font: "Noto Sans", sans-serif;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    display: flex;
     flex-direction: column;
     align-items: center;
     z-index: 2001;

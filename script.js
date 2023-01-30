@@ -92,15 +92,18 @@ window.onload = function () {
 
 	const modal = document.getElementById('modal');
 	const select = document.getElementById('choices');
-	const btn = document.getElementById('show-modal-btn');
+	const btn2 = document.getElementById('show-modal-btn');
 	const link = document.getElementById('selected-choice');
-
-	btn.addEventListener('click', function () {
+	console.log(btn2)
+	btn2.addEventListener('click', function () {
+		console.log(234232)
+	})
+	btn2.addEventListener('click', function () {
 		modal.style.display = "flex";
-	});
+    });
 	let city_api;
-	// Get the choices from the API
-	fetch('http://localhost:8000/city/')
+
+		fetch('http://localhost:8000/city/')
 		.then(response => response.json())
 		.then(data => {
 			data.results.forEach(choice => {
@@ -111,9 +114,12 @@ window.onload = function () {
 			});
 		})
 		.catch(error => console.error(error));
+	console.log(222222)
 
 	// Update the text under the link when a choice is selected
 	select.addEventListener('change', function () {
+		console.log(111111111)
+
 		link.innerHTML = this.options[this.selectedIndex].text;
 		city_api = this.options[this.selectedIndex].text;
 		let center = [55.75399399999374, 37.62209300000001];
@@ -151,6 +157,9 @@ window.onload = function () {
 
 
 	});
+	
+	// Get the choices from the API
+	
 	document.querySelector('#close-modal-btn').addEventListener('click', function () {
 		document.querySelector('#modal').style.display = 'none';
 	});
